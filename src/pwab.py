@@ -52,8 +52,8 @@ def get_netmask(iface):
 def scan_local_devices(ip_addr, netmask):
     netmask_prefix = sum([1 if i == '1' else 0 for i in bin(int(netmask, 16))])
     print (ip_addr + str(netmask_prefix))
-    ans, unans = srp(Ether(dst='ff:ff:ff:ff:ff:ff') / ARP(pdst=ip_addr + str(netmask_prefix)),
-                               timeout=10)
+    ans, unans = srp(Ether(dst='ff:ff:ff:ff:ff:ff') / ARP(pdst=ip_addr + '/' + str(netmask_prefix)),
+                               timeout=20)
     for s, r in ans:
         print (r[Ether].src)
     return 0
